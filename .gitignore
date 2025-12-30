@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+*.pkl
+*.pt
+*.h5
+.ipynb_checkpoints/
+.env
+.DS_Store
+
+# Allow the raw folder but still ignore specific large files if needed
+!data/raw/
+
+# Keep these ignored
+ data/images/  <-- Keep this if you don't want images on GitHub
+
+# Large ML artifacts
+*.npy
+*.npz
+*.pth
+*.ckpt
+data/processed/
+
+data/images/
