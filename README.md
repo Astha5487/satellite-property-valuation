@@ -1,12 +1,12 @@
-# 🏡 Multimodal House Price Prediction Using Tabular Data and Satellite Imagery
+# Multimodal House Price Prediction Using Tabular Data and Satellite Imagery
 
-## 📌 Project Overview
+## Project Overview
 This project predicts **residential house prices** by combining **structured tabular property data** with **satellite imagery–based visual context**. Traditional real estate valuation models rely heavily on numerical features such as **house size** and **construction quality**. However, these often fail to capture **neighborhood characteristics** like greenery, urban density, and infrastructure quality.  
 This project integrates **CNN-extracted satellite image embeddings** with tabular features to enhance both **predictive performance** and **interpretability**.
 
 ---
 
-## 🎯 Project Objectives
+## Project Objectives
 - Build a **baseline regression model** using tabular property features  
 - Extract **high-level visual embeddings** from satellite images using a **pre-trained ResNet50 CNN**  
 - Fuse tabular and visual features into a **unified multimodal feature space**  
@@ -14,10 +14,40 @@ This project integrates **CNN-extracted satellite image embeddings** with tabula
 - Provide **interpretability and transparency** through **Grad-CAM visual reasoning**
 
 ---
+## Project Structure
+```python
+satellite-property-valuation/
+├── data/
+│   ├── processed/
+│   │   ├── aligned_ids.npy
+│   │   ├── image_features.csv
+│   │   ├── resnet50_embeddings_info.csv
+│   │   ├── test_preprocessed.csv
+│   │   └── train_preprocessed.csv
+│   └── raw/
+│       ├── test2.csv
+│       └── train(1).csv
+│
+├── notebooks/
+│   ├── 01_tabular_eda.ipynb
+│   ├── 02_tabular_baseline_model.ipynb
+│   ├── 03_satellite_image_analysis.ipynb
+│   ├── 04_multimodal_fusion_model.ipynb
+│   └── 05_cnn_image_embeddings.ipynb
+│
+├── .gitignore
+├── 23118015_final.csv
+├── 23118015_report.pdf
+├── README.md
+└── requirements.txt
 
-## 📂 Dataset Description
 
-### 📑 Tabular Data (CSV)
+```
+---
+
+## Dataset Description
+
+### Tabular Data (CSV)
 The structured dataset includes property attributes such as:
 - Size: **`sqft_living`**
 - Quality indicators: **`grade`**, **`condition`**
@@ -28,7 +58,7 @@ These features capture **intrinsic house characteristics** and **locational sign
 
 ---
 
-### 🛰️ Satellite Imagery
+### Satellite Imagery
 Satellite images were retrieved using **latitude and longitude coordinates**. These images capture:
 - **Green cover**
 - **Road networks**
@@ -39,14 +69,14 @@ This provides **environmental context** that is difficult to encode numerically 
 
 ---
 
-## 🧠 Modeling and Feature Extraction
+## Modeling and Feature Extraction
 
-### 🖼️ CNN-Based Image Feature Extraction
+### CNN-Based Image Feature Extraction
 A **pre-trained ResNet50** was used as a **fixed feature extractor**. By removing the final classification layer, each satellite image was transformed into a **2,048-dimensional embedding** representing **spatial and environmental patterns**.
 
 ---
 
-### 🔗 Multimodal Feature Fusion
+### Multimodal Feature Fusion
 To prevent visual features from overwhelming the tabular data:
 - The **2,048-dimensional CNN embeddings** were compressed into **50 principal components** using **PCA**
 - These were **concatenated with tabular features**
@@ -54,7 +84,7 @@ To prevent visual features from overwhelming the tabular data:
 
 ---
 
-## 📊 Model Evaluation and Results
+## Model Evaluation and Results
 Performance was assessed using:
 - **Root Mean Squared Error (RMSE)**
 - **R² Score**
@@ -63,31 +93,31 @@ Evaluation was conducted in **log-price space** to ensure **numerical stability*
 
 ---
 
-## 📈 Performance Summary
+## Performance Summary
 
-### 🔹 Tabular Baseline Model
+### Tabular Baseline Model
 - **Features Used:** 9–18 Core Features  
 - **RMSE (Log):** 0.1651  
 - **R² Score:** 0.8668  
 
-### 🔹 Multimodal Model (Unaligned)
+### Multimodal Model (Unaligned)
 - **Features Used:** Tabular + 2,048-D Raw CNN  
 - **RMSE (Log):** 0.1980  
 - **R² Score:** 0.8120  
 
-### 🔹 Multimodal Model (Aligned + PCA)
+### Multimodal Model (Aligned + PCA)
 - **Features Used:** Tabular + 50-D Aligned CNN  
 - **RMSE (Log):** 0.1585  
 - **R² Score:** 0.8812  
 
-### 🔹 End-to-End Neural Network
+### End-to-End Neural Network
 - **Features Used:** Tabular + ResNet Backbone  
 - **RMSE (Log):** 0.2450  
 - **R² Score:** 0.7200  
 
 ---
 
-## 🔍 Explainability: Confirming Curb Appeal
+## Explainability: Confirming Curb Appeal
 **Grad-CAM (Gradient-weighted Class Activation Mapping)** was applied to the **last convolutional layer of ResNet50** to visualize the model’s focus. This explainability layer confirmed that the model identifies **economically relevant visual signals**, including:
 
 - **Green Canopies:** Validates the importance of greenery in property valuation  
@@ -96,13 +126,13 @@ Evaluation was conducted in **log-price space** to ensure **numerical stability*
 
 ---
 
-## ✅ Conclusion
+## Conclusion
 This project demonstrates that while **tabular data remains the strongest predictor** of house prices, **satellite imagery provides a critical supporting layer**. By properly **aligning images** and **reducing feature noise through PCA**, the multimodal approach achieved an **R² of 0.8812**, outperforming the tabular baseline.  
 The integration of **Grad-CAM** ensures that predictions are not only accurate, but also **transparent and grounded in visual reality**.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Python:** Pandas, NumPy, Scikit-learn  
 - **PyTorch:** ResNet50  
 - **XGBoost**  
