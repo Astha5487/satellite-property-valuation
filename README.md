@@ -39,6 +39,8 @@ satellite-property-valuation/
 ├── 23118015_final.csv
 ├── 23118015_report.pdf
 ├── README.md
+├── data_fetcher.py
+├── predictions_multimodal.csv
 └── requirements.txt
 
 
